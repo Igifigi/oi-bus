@@ -45,10 +45,8 @@ class PrintRequest(models.Model):
         file_contents = backup.file.read().decode('utf8').encode('latin2', 'replace')
         tags = ', '.join(f'{tag}' for tag in backup.owner.computer.tags.all())
         header = ' '.join([
-            _imm('Participant:'),
-            str(backup.owner),
-            _imm('Computer:'),
-            backup.owner.computer.nice_name,
+            _imm('Dostarcz do:'),
+            str(backup.owner.full_name),
             f'({tags})' if tags else '',
         ])
         a2ps = subprocess.run([
